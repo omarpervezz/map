@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <style>
+        #imageholder {
+            width: 80%;
+            height: 400px; /* Needs to be 70% of browser window*/
+            display: inline-block;
+            background-size: contain;
+            background-repeat: no-repeat;
+            left: 10%;
+            position: relative;
+            border: 1px solid red;
+            touch-action: pan-x;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            //    $("#imgholder").css('backgroundImage', 'url(/images/cadhouse3.jpg)');
+            console.log("test");
+            var imageUrl = "images/GonerbyMap.png";
+            $("#imageholder").css("background-image", "url(" + imageUrl + ")");
+
+            var xplotA = 50;
+            var yplotA = 50;
+            var xplotB = 100;
+            var yplotB = 100;
+            var xplotC = 150;
+            var yplotC = 150;
+
+            var currentuir = '123';
+
+            var dwgMarker = "<div class='markerpoint' itemdetails='item_Details_here~xx~xx~xx' id='appendmarker" + currentuir + "'style='background-color: transparant; border: 3px solid #0000FF; position: absolute; color:white; font-size:10px; cursor: pointer; width: 10px; height: 10px; top: " + (xplotA) + "px ;left:" + (yplotA) + "px ;'></div>";
+
+            $("#imageholder").append(dwgMarker);
+
+            currentuir = '456'
+
+            dwgMarker = "<div class='markerpoint' itemdetails='item_Details_here~xx~xx~xx' id='appendmarker" + currentuir + "'style='background-color: transparant; border: 3px solid #0000FF; position: absolute; color:white; font-size:10px; cursor: pointer; width: 10px; height: 10px; top: " + (xplotB) + "px ;left:" + (yplotB) + "px ;'></div>";
+
+            $("#imageholder").append(dwgMarker);
+
+            currentuir = '789'
+
+            dwgMarker = "<div class='markerpoint' itemdetails='item_Details_here~xx~xx~xx' id='appendmarker" + currentuir + "'style='background-color: transparant; border: 3px solid #0000FF; position: absolute; color:white; font-size:10px; cursor: pointer; width: 10px; height: 10px; top: " + (xplotC) + "px ;left:" + (yplotC) + "px ;'></div>";
+
+            $("#imageholder").append(dwgMarker);
+
+            $(".markerpoint").click(function (e) {
+                var this_id = ($(this).attr('id'));
+                alert("This ID: " + this_id);
+            });
+        });
+
+    </script>
+    <%--  <script>
+        $(document).ready(function () {
+            // alert($(window).width());
+            var w = $(window).width();
+            console.log("Window width: " + w);
+          
+            //reduce window width to 05% to remove horiz scroll
+            var sw = w * .9;
+         
+            $('#imageholder').css('width', (sw)); //($(window).width() + "px");
+            console.log("Imageholder width: " + $("#imageholder").width());
+            //$('#divtext').append("window width: " + w + " *div width: " + $('#imageholder').css('width'));
+            var dwgMarkerA = "<div class='markerpoint' id='1' style='background-color:transparant; border:3px solid blue; position: absolute; color:white; font-size:10px; cursor: pointer; width: 5px; height: 5px; top:119px; left:119px;'/>";
+          //  $("#imageholder").append(dwgMarkerA);
+
+        //    $('#containwidth').text($('#imageholder').css('width'));
+        
+            //Remove css contain
+            $('#btnRemomveContain').click(function () {
+                $('#imageholder').css('background-size', 'auto');
+            });
+            //Add css contain
+            $('#btnfitdwg').click(function () {
+                                $('#imageholder').css('background-size', 'contain');
+            });
+
+
+            $('#Button1').click(function () {
+                console.log("added magenta @ orig");
+                var dwgMarker = "<div class='markerpoint' id='2' style='background-color:transparant; border:3px solid magenta; position: absolute; color:white; font-size:10px; cursor: pointer; width: 5px; height: 5px; top:58px; left:173px;'/>";
+                $("#imageholder").append(dwgMarker);
+
+
+            });
+            $('#Button2').click(function () {
+                console.log("added green @ 46.185,46.185 - 30.79% of orig loc 150");
+                             var dwgMarker = "<div class='markerpoint' id='13234' style='background-color:transparant; border:3px solid green; position: absolute; color:white; font-size:10px; cursor: pointer; width: 5px; height: 5px; top:17.8582px; left:53.2667px;'/>";
+                $("#imageholder").append(dwgMarker);
+            });
+
+            $('#Button3').click(function () {
+                var dwgMarker = "<div class='markerpoint' id='125778734' style='background-color:transparant; border:3px solid blue; position: absolute; color:white; font-size:10px; cursor: pointer; width: 20px; height: 20px; top:36.66px; left:36.66px;'/>";
+                $("#imageholder").append(dwgMarker);
+            });
+           
+            
+            $('#btnReduceAndMark').click(function () {
+                $('#imageholder').css('background-size', 'contain');
+                var origW = $('#lblBMPOrigWidth').text();
+                var newW = 1136.7 / origW;
+                alert(newW);
+                return;
+                var markerTop = $('#imageholder').attr('width');
+                alert("markertop: " + markerTop);
+              
+
+                var markerLeft = 100;
+                var dwgMarker = "<div class='markerpoint' id='2' style='background-color:transparant; border:3px solid cyan; position: absolute; color:white; font-size:10px; cursor: pointer; width: 5px; height: 5px; top:" + markerTop + "px; left:" + m +"px;'/>";
+                $("#imageholder").append(dwgMarker);
+            });
+
+            $('#imageholder').click(function (e) {
+                var parentOffset = $(this).parent().offset();
+                //or $(this).offset(); if you really just want the current element's offset
+                var relX = e.pageX - parentOffset.left;
+                var relY = e.pageY - parentOffset.top;
+                // alert(relX + "," + relY);
+                $('#clickpoint').text(relX + "," + relY);
+            });
+
+        });
+    </script>--%>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="imageholder" runat="server"></div>
+        <p>Map should pan and zoom and blue squares should move with it at the relevant position and not change size - always is 10px x 10px.</p>
+        <p>The div with the red border should have a height of 70% of the browser window.</p>
+    </form>
+</body>
+</html>
