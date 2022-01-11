@@ -1,6 +1,0 @@
-﻿Imports System.IO
-Imports System.Drawing
-Partial Class divImage
-    Inherits System.Web.UI.Page
-    'No code behind required
-End Class
